@@ -38,10 +38,10 @@ class Player
 
   def identifier_is_valid?
     if identifier.length != 1
-      puts 'Identifier must have exactly one character.'
+      puts 'Identifier must has exactly one character.'
     elsif identifier.to_i.to_s == identifier
       puts 'Identifier can\'t be a number.'
-    elsif identifier.empty?
+    elsif identifier.strip.empty?
       puts 'Identifier can\'t be an empty string.'
     else
       true
