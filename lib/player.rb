@@ -1,19 +1,23 @@
 class Player
+  @identifiers = []
+
+  class << self
+    attr_accessor :identifiers
+
+    def reset_identifiers
+      Player.identifiers = []
+    end
+  end
+
   attr_reader :name, :identifier
 
-  @@identifiers = []
+  def initialize; end
 
-  def initialize
-    puts "What's player #{@@identifiers.length + 1} name?"
+  def identify
+    puts "What's player #{Player.identifiers.length + 1} name?"
     @name = gets.chomp
     choose_identifier
   end
-
-  def self.reset_identifiers
-    @@identifiers = []
-  end
-
-  private
 
   def choose_identifier
     loop do
@@ -23,11 +27,11 @@ class Player
       break if identifier_available? && identifier_is_valid?
     end
 
-    @@identifiers.push(@identifier)
+    Player.identifiers.push(@identifier)
   end
 
   def identifier_available?
-    return true unless @@identifiers.include? @identifier
+    return true unless Player.identifiers.include? @identifier
 
     puts "#{@identifier} was already choosen as identifier."
   end
