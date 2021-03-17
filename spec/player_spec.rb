@@ -1,5 +1,3 @@
-require 'pry'
-
 require_relative '../lib/player'
 
 describe Player do
@@ -12,7 +10,7 @@ describe Player do
         allow(player).to receive(:identifier_is_valid?).and_return(true)
       end
 
-      it 'ask for identifier twice' do
+      it 'ask for identifier once' do
         asking_message = 'Choose an identifier:'
         expect(player).to receive(:puts).with(asking_message).once
         player.choose_identifier
@@ -36,6 +34,7 @@ describe Player do
       let(:valid_input) { 'M' }
 
       before do
+        allow(player).to receive(:puts)
         allow(player).to receive(:gets).and_return(valid_input)
         allow(player).to receive(:identifier_available?).and_return(true)
         allow(player).to receive(:identifier_is_valid?).and_return(true)
@@ -69,6 +68,7 @@ describe Player do
 
     context 'identifier is not avalilable' do
       before do
+        allow(player).to receive(:puts)
         player.instance_variable_set(:@identifier, 'M')
         described_class.instance_variable_set(:@identifiers, %w[M C])
       end
@@ -107,6 +107,7 @@ describe Player do
     context 'identifier is invalid' do
       context 'identifier has more than one character' do
         before do
+          allow(player).to receive(:puts)
           player.instance_variable_set(:@identifier, 'Martin')
         end
 
@@ -122,6 +123,7 @@ describe Player do
 
       context 'identifier has more than one character' do
         before do
+          allow(player).to receive(:puts)
           player.instance_variable_set(:@identifier, '9')
         end
 
@@ -137,6 +139,7 @@ describe Player do
 
       context 'identifier is an empty string' do
         before do
+          allow(player).to receive(:puts)
           player.instance_variable_set(:@identifier, ' ')
         end
 
