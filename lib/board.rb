@@ -2,6 +2,8 @@ class Board
   WINNER_CONFIGURATIONS = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7],
                            [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
 
+  attr_accessor :selections, :locations
+
   def initialize(first_identifier, second_identifier)
     @selections = { first_identifier => [], second_identifier => [] }
     @locations = (1..9).to_a
@@ -47,8 +49,6 @@ class Board
     @selections[identifier] << location.to_i
     @locations.delete(location.to_i)
   end
-
-  private
 
   def print(location)
     if @locations.include? location
