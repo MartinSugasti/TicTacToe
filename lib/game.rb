@@ -14,8 +14,6 @@ class Game
     Player.reset_identifiers
   end
 
-  private
-
   def game_over?
     @board.game_over?
   end
